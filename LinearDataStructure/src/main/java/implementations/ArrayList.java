@@ -78,7 +78,7 @@ public class ArrayList<E> implements List<E> {
 
     @Override
     public int indexOf(E element) {
-        for (int i = 0; i < this.size - 1; i++) {
+        for (int i = 0; i < this.size; i++) {
             Object temp = this.elements[i];
             if (element.equals(temp)) {
                 return i;
@@ -89,13 +89,7 @@ public class ArrayList<E> implements List<E> {
 
     @Override
     public boolean contains(E element) {
-        for (int i = 0; i < this.size; i++) {
-            Object temp = this.elements[i];
-            if (element.equals(temp)) {
-                return true;
-            }
-        }
-        return false;
+        return this.indexOf(element) >= 0;
     }
 
     @Override
@@ -111,7 +105,7 @@ public class ArrayList<E> implements List<E> {
 
             @Override
             public boolean hasNext() {
-                return this.index < size;
+                return this.index < size();
             }
 
             @Override
