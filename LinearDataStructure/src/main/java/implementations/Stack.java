@@ -12,8 +12,8 @@ public class Stack<E> implements AbstractStack<E> {
     private int size;
 
     private static class Node<E> {
-        public E value;
-        public Node<E> next;
+        private E value;
+        private Node<E> next;
 
         public Node(E element) {
             this.value = element;
