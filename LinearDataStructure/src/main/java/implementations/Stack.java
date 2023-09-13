@@ -2,6 +2,7 @@ package implementations;
 
 import interfaces.AbstractStack;
 
+import javax.annotation.Nonnull;
 import java.util.Iterator;
 
 public class Stack<E> implements AbstractStack<E> {
@@ -57,6 +58,7 @@ public class Stack<E> implements AbstractStack<E> {
         return this.size == 0;
     }
 
+    @Nonnull
     @Override
     public Iterator<E> iterator() {
         return new Iterator<E>() {
