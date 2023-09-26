@@ -1,5 +1,6 @@
 package solutions;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BinaryTree {
@@ -31,6 +32,18 @@ public class BinaryTree {
     }
 
     public List<Integer> topView() {
-        return null;
+        List<Integer> result = new ArrayList<>();
+        BinaryTree currentLeft = this;
+        while (currentLeft.left != null) {
+            currentLeft = currentLeft.left;
+            result.add(currentLeft.key);
+        }
+        result.add(this.key);
+        BinaryTree currentRight = this;
+        while (currentRight.right != null) {
+            currentRight = currentRight.right;
+            result.add(currentRight.key);
+        }
+        return result;
     }
 }
