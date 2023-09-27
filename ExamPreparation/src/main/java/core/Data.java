@@ -3,52 +3,77 @@ package core;
 import interfaces.Entity;
 import interfaces.Repository;
 
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Data implements Repository {
+    private ArrayDeque<Entity> data;
+
+    public Data() {
+        this.data = new ArrayDeque<>();
+    }
+
+    public Data(Data other) {
+        this.data = other.data;
+    }
 
     @Override
     public void add(Entity entity) {
-
+        this.data.add(entity);
     }
 
     @Override
     public Entity getById(int id) {
-        return null;
+        return this.data.stream()
+                .filter(e -> e.getId() == id)
+                .findFirst()
+                .orElse(null);
     }
 
     @Override
     public List<Entity> getByParentId(int id) {
-        return null;
+        List<Entity> children = new ArrayList<>();
+        for (Entity datum : data) {
+            if (datum.getParentId() == id) {
+                children.add(datum);
+            }
+        }
+        return children;
     }
 
     @Override
     public List<Entity> getAll() {
-        return null;
+        return new ArrayList<>(this.data);
     }
 
     @Override
     public Repository copy() {
-        return null;
+        return new Data(this);
     }
 
     @Override
     public List<Entity> getAllByType(String type) {
-        return null;
+        List<Entity> result = new ArrayList<>();
+        for (Entity datum : data) {
+            if (datum.getClass().getSimpleName().equals(type)) {
+                result.add(datum);
+            }
+        }
+        return result;
     }
 
     @Override
     public Entity peekMostRecent() {
-        return null;
+        return this.data.peekLast();
     }
 
     @Override
     public Entity pollMostRecent() {
-        return null;
+        return this.data.pollLast();
     }
 
     @Override
     public int size() {
-        return 0;
+        return this.data.size();
     }
 }
